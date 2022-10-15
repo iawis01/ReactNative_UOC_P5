@@ -2,10 +2,34 @@
   position: absolute
 }
 
-.relative {
-  position: relative
-}
-
 .flex {
   display: flex
+}
+
+.h-full {
+  height: 100%
+}
+
+.h-64 {
+  height: 16rem
+}
+
+.h-fit {
+  height: fit-content
+}
+
+.w-full {
+  width: 100%
+}
+
+.w-fit {
+  width: fit-content
+}
+
+.flex-1 {
+  flex: 1 1 0%
+}
+
+.content-center {
+  align-content: center
 }

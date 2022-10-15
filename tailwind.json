@@ -4,14 +4,46 @@
 			"position": "absolute"
 		}
 	},
-	"relative": {
-		"style": {
-			"position": "relative"
-		}
-	},
 	"flex": {
 		"style": {
 			"display": "flex"
+		}
+	},
+	"h-full": {
+		"style": {
+			"height": "100%"
+		}
+	},
+	"h-64": {
+		"style": {
+			"height": 256
+		}
+	},
+	"h-fit": {
+		"style": {
+			"height": "fit-content"
+		}
+	},
+	"w-full": {
+		"style": {
+			"width": "100%"
+		}
+	},
+	"w-fit": {
+		"style": {
+			"width": "fit-content"
+		}
+	},
+	"flex-1": {
+		"style": {
+			"flexGrow": 1,
+			"flexShrink": 1,
+			"flexBasis": "0%"
+		}
+	},
+	"content-center": {
+		"style": {
+			"alignContent": "center"
 		}
 	}
 }
