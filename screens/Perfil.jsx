@@ -1,8 +1,38 @@
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
+import { Image } from '@rneui/themed';
+import { useNavigation } from '@react-navigation/native';
+import { useLayoutEffect } from 'react';
 const Perfil = () => {
+	const navigation = useNavigation();
+
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			headerShown: false,
+		});
+	});
+
 	return (
-		<View>
-			<Text>Perfil</Text>
+		<View style={{ backgroundColor: '#e0eab5' }}>
+			<Image
+				source={require('../assets/perfil.jpg')}
+				containerStyle={{ width: '100%', height: 220 }}
+				PlaceholderContent={<ActivityIndicator />}
+			/>
+			<View></View>
+			<Text
+				style={{
+					color: 'white',
+					fontSize: 42,
+					lineHeight: 84,
+					margin: 5,
+					fontWeight: 'bold',
+					textAlign: 'center',
+					backgroundColor: '#000000c0',
+					height: 100,
+				}}
+			>
+				Contenido
+			</Text>
 		</View>
 	);
 };

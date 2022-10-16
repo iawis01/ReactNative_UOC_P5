@@ -34,7 +34,7 @@ const TabNavigator = () => {
 							<Icon
 								name='area-graph'
 								type='entypo'
-								color={focused ? '#addfec' : 'gray'}
+								color={focused ? '#95d7e7' : 'gray'}
 							/>
 						);
 					} else if (route.name === 'Nuevo Reto') {
@@ -42,7 +42,7 @@ const TabNavigator = () => {
 							<Icon
 								name='add-to-list'
 								type='entypo'
-								color={focused ? 'red' : 'gray'}
+								color={focused ? '#9a8830' : 'gray'}
 							/>
 						);
 					} else if (route.name === 'Perfil') {
@@ -50,7 +50,7 @@ const TabNavigator = () => {
 							<Icon
 								name='user'
 								type='entypo'
-								color={focused ? 'red' : 'gray'}
+								color={focused ? '#e0eab5' : 'gray'}
 							/>
 						);
 					} else if (route.name === 'Contactar') {
@@ -58,7 +58,7 @@ const TabNavigator = () => {
 							<Icon
 								name='mail'
 								type='entypo'
-								color={focused ? 'red' : 'gray'}
+								color={focused ? '#008d92' : 'gray'}
 							/>
 						);
 					} else if (route.name === 'Activos') {
@@ -66,12 +66,16 @@ const TabNavigator = () => {
 							<Icon
 								name='flag'
 								type='entypo'
-								color={focused ? 'red' : 'gray'}
+								color={focused ? '#e4d0a3' : 'gray'}
 							/>
 						);
 					} else if (route.name === 'Completados') {
 						return (
-							<Icon name='box' type='entypo' color={focused ? 'red' : 'gray'} />
+							<Icon
+								name='box'
+								type='entypo'
+								color={focused ? '#b7c2dd' : 'gray'}
+							/>
 						);
 					}
 				},
