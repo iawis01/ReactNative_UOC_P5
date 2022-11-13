@@ -10,7 +10,7 @@ const Inicio = () => {
 			<ImageBackground
 				source={require('../assets/mobile-background.jpg')}
 				resizeMode='cover'
-				style={{ flex: 1, justifyContent: 'flex-end' }}
+				style={{ flex: 1, justifyContent: 'center' }}
 			>
 				<Navegador />
 			</ImageBackground>

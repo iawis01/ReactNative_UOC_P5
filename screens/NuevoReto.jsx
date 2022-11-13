@@ -10,12 +10,19 @@ const NuevoReto = () => {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			headerShown: false,
+			title: 'Agregar Reto',
+			headerStyle: {
+				backgroundColor: '#998830',
+			},
+			headerTitleStyle: {
+				color: navigation.isFocused ? '#fff' : 'gray',
+				fontWeight: 'bold',
+			},
 		});
-	});
+	}, [navigation]);
 
 	return (
-		<View style={{ backgroundColor: '#998830' }}>
+		<View style={{ backgroundColor: '#998830', height: '100%' }}>
 			<Image
 				source={require('../assets/new-goal.jpg')}
 				containerStyle={{ width: '100%', height: 220 }}

@@ -1,37 +1,57 @@
 import { View, Text, ActivityIndicator } from 'react-native';
 import { Image } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useState } from 'react';
+import {
+	Button,
+	InputAccessoryView,
+	ScrollView,
+	TextInput,
+} from 'react-native';
+
 const Contactar = () => {
+	const inputAccessoryViewID = 'uniqueID';
+	const initialText = '';
+	const [text, setText] = useState(initialText);
 	const navigation = useNavigation();
 
+	// Estilo del Header
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			headerShown: false,
+			title: 'Formulario de contacto',
+			headerStyle: {
+				backgroundColor: '#008d92',
+			},
+			headerTitleStyle: {
+				color: navigation.isFocused ? '#fff' : 'gray',
+				fontWeight: 'bold',
+			},
 		});
-	});
+	}, [navigation]);
 
 	return (
-		<View style={{ backgroundColor: '#008d92' }}>
+		<View style={{ backgroundColor: '#008d92', height: '100%' }}>
 			<Image
 				source={require('../assets/contactar.jpg')}
 				containerStyle={{ width: '100%', height: 220 }}
 				PlaceholderContent={<ActivityIndicator />}
 			/>
-			<View></View>
-			<Text
-				style={{
-					color: 'white',
-					fontSize: 42,
-					lineHeight: 84,
-					margin: 5,
-					fontWeight: 'bold',
-					textAlign: 'center',
-					backgroundColor: '#000000c0',
-				}}
-			>
-				Contenido
-			</Text>
+
+			<ScrollView keyboardDismissMode='interactive'>
+				<TextInput
+					style={{
+						padding: 16,
+						marginTop: 50,
+					}}
+					inputAccessoryViewID={inputAccessoryViewID}
+					onChangeText={setText}
+					value={text}
+					placeholder={'Quieres decirnos algo? escribelo aqui'}
+				/>
+			</ScrollView>
+			<InputAccessoryView nativeID={inputAccessoryViewID}>
+				<Button onPress={() => setText(initialText)} title='Clear text' />
+			</InputAccessoryView>
 		</View>
 	);
 };

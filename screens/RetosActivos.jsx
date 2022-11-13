@@ -15,7 +15,7 @@ const RetosActivos = () => {
 	});
 
 	return (
-		<View style={{ backgroundColor: '#e4d0a3' }}>
+		<View style={{ backgroundColor: '#e4d0a3', height: '100%' }}>
 			<Image
 				source={require('../assets/activos.jpg')}
 				containerStyle={{ width: '100%', height: 220 }}

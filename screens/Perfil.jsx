@@ -12,7 +12,7 @@ const Perfil = () => {
 	});
 
 	return (
-		<View style={{ backgroundColor: '#e0eab5' }}>
+		<View style={{ backgroundColor: '#e0eab5', height: '100%' }}>
 			<Image
 				source={require('../assets/perfil.jpg')}
 				containerStyle={{ width: '100%', height: 220 }}

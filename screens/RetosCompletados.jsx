@@ -15,7 +15,7 @@ const RetosCompletados = () => {
 	});
 
 	return (
-		<View style={{ backgroundColor: '#b7c2dd' }}>
+		<View style={{ backgroundColor: '#b7c2dd', height: '100%' }}>
 			<Image
 				source={require('../assets/completados.jpg')}
 				containerStyle={{ width: '100%', height: 220 }}
