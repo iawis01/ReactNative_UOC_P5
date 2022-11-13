@@ -1,11 +1,6 @@
 import { View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import RetosCompletados from '../screens/RetosCompletados';
-import Evolucion from '../screens/Evolucion';
-import NuevoReto from '../screens/NuevoReto';
-import Perfil from '../screens/Perfil';
-import Contactar from '../screens/Contactar';
-import RetosActivos from '../screens/RetosActivos';
+
 import { useLayoutEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
@@ -45,22 +40,6 @@ const TabNavigator = () => {
 								color={focused ? '#9a8830' : 'gray'}
 							/>
 						);
-					} else if (route.name === 'Perfil') {
-						return (
-							<Icon
-								name='user'
-								type='entypo'
-								color={focused ? '#e0eab5' : 'gray'}
-							/>
-						);
-					} else if (route.name === 'Contactar') {
-						return (
-							<Icon
-								name='mail'
-								type='entypo'
-								color={focused ? '#008d92' : 'gray'}
-							/>
-						);
 					} else if (route.name === 'Activos') {
 						return (
 							<Icon
@@ -80,14 +59,7 @@ const TabNavigator = () => {
 					}
 				},
 			})}
-		>
-			<Tab.Screen name='Evolucion' component={Evolucion} />
-			<Tab.Screen name='Nuevo Reto' component={NuevoReto} />
-			<Tab.Screen name='Perfil' component={Perfil} />
-			<Tab.Screen name='Contactar' component={Contactar} />
-			<Tab.Screen name='Activos' component={RetosActivos} />
-			<Tab.Screen name='Completados' component={RetosCompletados} />
-		</Tab.Navigator>
+		></Tab.Navigator>
 	);
 };
 export default TabNavigator;

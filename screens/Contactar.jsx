@@ -1,8 +1,9 @@
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { Image } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { useLayoutEffect, useState } from 'react';
 import { Button, ScrollView, TextInput } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 const Contactar = () => {
 	const initialText = '';
@@ -20,6 +21,14 @@ const Contactar = () => {
 				color: navigation.isFocused ? '#fff' : 'gray',
 				fontWeight: 'bold',
 			},
+			headerLeft: () => (
+				<TouchableOpacity
+					style={{ marginLeft: 12 }}
+					onPress={() => navigation.goBack()}
+				>
+					<AntDesign name='left' size={24} color='white' />
+				</TouchableOpacity>
+			),
 		});
 	}, [navigation]);
 

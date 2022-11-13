@@ -23,7 +23,7 @@ const buttonStyle = {
 	backgroundColor: '#000000c0',
 };
 
-const Evolucion = () => {
+const Home = () => {
 	const tw = useTailwind();
 	const navigation = useNavigation();
 
@@ -33,9 +33,9 @@ const Evolucion = () => {
 			headerLeft: () => (
 				<TouchableOpacity
 					style={{ marginLeft: 12 }}
-					onPress={() => navigation.goBack()}
+					onPress={() => navigation.navigate('Perfil')}
 				>
-					<AntDesign name='left' size={24} color='white' />
+					<AntDesign name='user' size={24} color='white' />
 				</TouchableOpacity>
 			),
 			headerRight: () => (
@@ -46,7 +46,7 @@ const Evolucion = () => {
 					<AntDesign name='mail' size={24} color='white' />
 				</TouchableOpacity>
 			),
-			title: 'Mi Evolucion',
+			title: 'Mis Retos',
 			headerStyle: {
 				backgroundColor: '#95d7e7',
 			},
@@ -60,7 +60,14 @@ const Evolucion = () => {
 	return (
 		<ScrollView style={{ backgroundColor: '#95d7e7' }}>
 			<Image
-				source={require('../assets/evolucion.jpg')}
+				position='absolute'
+				left={0}
+				bottom={0}
+				w='full'
+				h='300px'
+				resizeMode='cover'
+				source={'../assets/masthead.png'}
+				alt='masthead image'
 				containerStyle={{ width: '100%', aspectRatio: 3 / 2 }}
 				PlaceholderContent={<ActivityIndicator />}
 			/>
@@ -95,4 +102,4 @@ const Evolucion = () => {
 		</ScrollView>
 	);
 };
-export default Evolucion;
+export default Home;

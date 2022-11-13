@@ -1,7 +1,9 @@
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { Image } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { useLayoutEffect } from 'react';
+import { AntDesign } from '@expo/vector-icons';
+
 const Perfil = () => {
 	const navigation = useNavigation();
 
@@ -15,6 +17,14 @@ const Perfil = () => {
 				color: navigation.isFocused ? '#fff' : 'gray',
 				fontWeight: 'bold',
 			},
+			headerLeft: () => (
+				<TouchableOpacity
+					style={{ marginLeft: 12 }}
+					onPress={() => navigation.goBack()}
+				>
+					<AntDesign name='left' size={24} color='white' />
+				</TouchableOpacity>
+			),
 		});
 	}, [navigation]);
 
