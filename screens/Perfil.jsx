@@ -7,9 +7,16 @@ const Perfil = () => {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			headerShown: false,
+			title: 'Perfil',
+			headerStyle: {
+				backgroundColor: '#e0eab5',
+			},
+			headerTitleStyle: {
+				color: navigation.isFocused ? '#fff' : 'gray',
+				fontWeight: 'bold',
+			},
 		});
-	});
+	}, [navigation]);
 
 	return (
 		<View style={{ backgroundColor: '#e0eab5', height: '100%' }}>

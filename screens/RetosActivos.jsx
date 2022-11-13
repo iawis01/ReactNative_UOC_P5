@@ -10,9 +10,16 @@ const RetosActivos = () => {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			headerShown: false,
+			title: 'Activos',
+			headerStyle: {
+				backgroundColor: '#e4d0a3',
+			},
+			headerTitleStyle: {
+				color: navigation.isFocused ? '#fff' : 'gray',
+				fontWeight: 'bold',
+			},
 		});
-	});
+	}, [navigation]);
 
 	return (
 		<View style={{ backgroundColor: '#e4d0a3', height: '100%' }}>

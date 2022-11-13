@@ -10,9 +10,16 @@ const RetosCompletados = () => {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			headerShown: false,
+			title: 'Completados',
+			headerStyle: {
+				backgroundColor: '#b7c2dd',
+			},
+			headerTitleStyle: {
+				color: navigation.isFocused ? '#fff' : 'gray',
+				fontWeight: 'bold',
+			},
 		});
-	});
+	}, [navigation]);
 
 	return (
 		<View style={{ backgroundColor: '#b7c2dd', height: '100%' }}>
