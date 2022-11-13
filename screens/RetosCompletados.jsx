@@ -12,6 +12,7 @@ const RetosCompletados = () => {
 	useLayoutEffect(() => {
 		navigation.setOptions({
 			title: 'Completados',
+			headerTitleAlign: 'center',
 			headerStyle: {
 				backgroundColor: '#b7c2dd',
 			},

@@ -47,6 +47,7 @@ const Evolucion = () => {
 				</TouchableOpacity>
 			),
 			title: 'Mi Evolucion',
+			headerTitleAlign: 'center',
 			headerStyle: {
 				backgroundColor: '#95d7e7',
 			},

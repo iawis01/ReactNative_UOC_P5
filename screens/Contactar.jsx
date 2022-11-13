@@ -14,6 +14,7 @@ const Contactar = () => {
 	useLayoutEffect(() => {
 		navigation.setOptions({
 			title: 'Formulario de contacto',
+			headerTitleAlign: 'center',
 			headerStyle: {
 				backgroundColor: '#008d92',
 			},

@@ -28,6 +28,7 @@ const NuevoReto = () => {
 				</TouchableOpacity>
 			),
 			title: 'Agregar Reto',
+			headerTitleAlign: 'center',
 			headerStyle: {
 				backgroundColor: '#998830',
 			},

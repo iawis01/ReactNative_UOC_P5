@@ -47,8 +47,9 @@ const Home = () => {
 				</TouchableOpacity>
 			),
 			title: 'Mis Retos',
+			headerTitleAlign: 'center',
 			headerStyle: {
-				backgroundColor: '#95d7e7',
+				backgroundColor: '#006ad8',
 			},
 			headerTitleStyle: {
 				color: navigation.isFocused ? '#fff' : 'gray',
@@ -58,16 +59,17 @@ const Home = () => {
 	}, [navigation]);
 
 	return (
-		<ScrollView style={{ backgroundColor: '#95d7e7' }}>
+		<ScrollView style={{ backgroundColor: '#006ad8' }}>
 			<Image
-				position='absolute'
-				left={0}
-				bottom={0}
-				w='full'
-				h='300px'
-				resizeMode='cover'
-				source={'../assets/masthead.png'}
-				alt='masthead image'
+				style={{
+					position: 'absolute',
+					left: 0,
+					bottom: 0,
+					w: 'full',
+					h: '300px',
+					resizeMode: 'cover',
+				}}
+				source={require('../assets/masthead.png')}
 				containerStyle={{ width: '100%', aspectRatio: 3 / 2 }}
 				PlaceholderContent={<ActivityIndicator />}
 			/>

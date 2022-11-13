@@ -12,6 +12,7 @@ const RetosActivos = () => {
 	useLayoutEffect(() => {
 		navigation.setOptions({
 			title: 'Activos',
+			headerTitleAlign: 'center',
 			headerStyle: {
 				backgroundColor: '#e4d0a3',
 			},
