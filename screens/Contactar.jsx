@@ -2,15 +2,9 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import { Image } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { useLayoutEffect, useState } from 'react';
-import {
-	Button,
-	InputAccessoryView,
-	ScrollView,
-	TextInput,
-} from 'react-native';
+import { Button, ScrollView, TextInput } from 'react-native';
 
 const Contactar = () => {
-	const inputAccessoryViewID = 'uniqueID';
 	const initialText = '';
 	const [text, setText] = useState(initialText);
 	const navigation = useNavigation();
@@ -43,15 +37,11 @@ const Contactar = () => {
 						padding: 16,
 						marginTop: 50,
 					}}
-					inputAccessoryViewID={inputAccessoryViewID}
 					onChangeText={setText}
 					value={text}
 					placeholder={'Quieres decirnos algo? escribelo aqui'}
 				/>
 			</ScrollView>
-			<InputAccessoryView nativeID={inputAccessoryViewID}>
-				<Button onPress={() => setText(initialText)} title='Clear text' />
-			</InputAccessoryView>
 		</View>
 	);
 };
