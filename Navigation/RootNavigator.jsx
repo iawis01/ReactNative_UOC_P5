@@ -14,13 +14,13 @@ const RootStack = createNativeStackNavigator();
 const RootNavigator = () => {
 	return (
 		<RootStack.Navigator>
-			<RootStack.Screen name='Home' component={Home} />
+			{/* <RootStack.Screen name='Home' component={Home} /> */}
 			<RootStack.Screen name='Evolucion' component={Evolucion} />
-			<RootStack.Screen name='Contactar' component={Contactar} />
-			<RootStack.Screen name='Perfil' component={Perfil} />
+			{/* <RootStack.Screen name='Contactar' component={Contactar} />
+			<RootStack.Screen name='Perfil' component={Perfil} /> */}
 			<RootStack.Screen name='NuevoReto' component={NuevoReto} />
-			<RootStack.Screen name='Activos' component={RetosActivos} />
-			<RootStack.Screen name='Completados' component={RetosCompletados} />
+			{/* <RootStack.Screen name='Activos' component={RetosActivos} />
+			<RootStack.Screen name='Completados' component={RetosCompletados} /> */}
 		</RootStack.Navigator>
 	);
 };

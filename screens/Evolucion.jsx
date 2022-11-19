@@ -66,12 +66,12 @@ const Evolucion = () => {
 				PlaceholderContent={<ActivityIndicator />}
 			/>
 
-			<TouchableOpacity style={buttonStyle}>
+			{/* <TouchableOpacity style={buttonStyle}>
 				<Button
 					title='Evolucion'
 					onPress={() => navigation.navigate('Evolucion')}
 				/>
-			</TouchableOpacity>
+			</TouchableOpacity> */}
 
 			<TouchableOpacity style={buttonStyle}>
 				<Button
@@ -79,7 +79,7 @@ const Evolucion = () => {
 					onPress={() => navigation.navigate('NuevoReto')}
 				/>
 			</TouchableOpacity>
-
+			{/* 
 			<TouchableOpacity style={buttonStyle}>
 				<Button
 					title='Retos Completados'
@@ -92,7 +92,7 @@ const Evolucion = () => {
 					title='Retos Activos'
 					onPress={() => navigation.navigate('Activos')}
 				/>
-			</TouchableOpacity>
+			</TouchableOpacity> */}
 		</ScrollView>
 	);
 };
