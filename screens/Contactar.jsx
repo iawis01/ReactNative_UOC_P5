@@ -13,7 +13,7 @@ const Contactar = () => {
 	// Estilo del Header
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			title: 'Formulario de contacto',
+			title: 'Equipo',
 			headerTitleAlign: 'center',
 			headerStyle: {
 				backgroundColor: '#008d92',
@@ -42,15 +42,10 @@ const Contactar = () => {
 			/>
 
 			<ScrollView keyboardDismissMode='interactive'>
-				<TextInput
-					style={{
-						padding: 16,
-						marginTop: 50,
-					}}
-					onChangeText={setText}
-					value={text}
-					placeholder={'Quieres decirnos algo? escribelo aqui'}
-				/>
+				<Text>Conoce el Equipo</Text>
+				<Text>Iago</Text>
+				<Text>Gerard</Text>
+				<Text>Niko</Text>
 			</ScrollView>
 		</View>
 	);

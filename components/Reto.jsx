@@ -9,7 +9,15 @@ import { Image } from '@rneui/themed';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-function Reto({ nombre, detalle, completado }) {
+function Reto({
+	nombre,
+	detalle,
+	completado,
+	categoria,
+	tiempo,
+	activo,
+	prioridad,
+}) {
 	const tw = useTailwind();
 	const navigation = useNavigation();
 
@@ -21,11 +29,16 @@ function Reto({ nombre, detalle, completado }) {
 					nombre: nombre,
 					detalle: detalle,
 					completado: completado,
+					categoria: categoria,
+					tiempo: tiempo,
+					activo: activo,
+					prioridad: prioridad,
 				})
 			}
 		>
 			<Text style={tw('uppercase text-xl font-bold')}>{nombre}</Text>
 			<Text>{detalle}</Text>
+
 			<View style={tw('absolute bottom-0 right-8 bg-red-500 rounded-xl p-1 ')}>
 				<Text style={tw(' text-white')}>{completado}</Text>
 			</View>

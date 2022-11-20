@@ -65,7 +65,7 @@ const Evolucion = () => {
 					style={{ marginRight: 12 }}
 					onPress={() => navigation.navigate('Contactar')}
 				>
-					<AntDesign name='mail' size={24} color='white' />
+					<AntDesign name='team' size={24} color='white' />
 				</TouchableOpacity>
 			),
 			title: 'Mi Evolucion',
@@ -90,6 +90,10 @@ const Evolucion = () => {
 				nombre={item.nombre}
 				detalle={item.detalle}
 				completado={item.completado}
+				categoria={item.categoria}
+				tiempo={item.tiempo}
+				activo={item.activo}
+				prioridad={item.prioridad}
 			/>
 		);
 	};
