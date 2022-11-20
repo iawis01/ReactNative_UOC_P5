@@ -2,14 +2,40 @@
   position: absolute
 }
 
+.bottom-0 {
+  bottom: 0px
+}
+
+.right-5 {
+  right: 1.25rem
+}
+
 .flex {
   display: flex
 }
 
-.h-full {
-  height: 100%
-}
-
 .w-full {
   width: 100%
+}
+
+.flex-1 {
+  flex: 1 1 0%
+}
+
+.bg-mainBlue {
+  --tw-bg-opacity: 1;
+  background-color: rgb(149 215 231 / var(--tw-bg-opacity))
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
+.font-bold {
+  font-weight: 700
+}
+
+.uppercase {
+  text-transform: uppercase
 }

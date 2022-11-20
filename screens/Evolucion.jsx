@@ -7,13 +7,18 @@ import {
 	Pressable,
 	TouchableOpacity,
 } from 'react-native';
+import { useState, useEffect } from 'react';
 import { useTailwind } from 'tailwind-rn/dist';
 import { useNavigation } from '@react-navigation/native';
 import { useLayoutEffect } from 'react';
 import { Image } from '@rneui/themed';
 import { AntDesign } from '@expo/vector-icons';
+import { db } from '../db/firebaseConfig';
+import { collection, onSnapshot } from 'firebase/firestore';
+import Reto from '../components/Reto';
 
 const buttonStyle = {
+	bottom: 0,
 	color: 'white',
 	fontSize: 42,
 	lineHeight: 84,
@@ -21,11 +26,22 @@ const buttonStyle = {
 	fontWeight: 'bold',
 	textAlign: 'center',
 	backgroundColor: '#000000c0',
+	position: 'absolute',
+	bottom: 50,
+	right: 8,
+	borderRadius: 50,
 };
 
 const Evolucion = () => {
 	const tw = useTailwind();
 	const navigation = useNavigation();
+
+	const [goals, setGoals] = useState([]);
+	useEffect(() => {
+		onSnapshot(collection(db, 'retos'), snapshot => {
+			setGoals(snapshot.docs.map(doc => doc.data()));
+		});
+	}, [goals]);
 
 	// Estilo del Header
 	useLayoutEffect(() => {
@@ -59,7 +75,8 @@ const Evolucion = () => {
 	}, [navigation]);
 
 	return (
-		<ScrollView style={{ backgroundColor: '#95d7e7' }}>
+		// <View style={{ backgroundColor: '#95d7e7' }} flex={1}>
+		<View style={tw('bg-mainBlue flex-1')}>
 			<Image
 				source={require('../assets/evolucion.jpg')}
 				containerStyle={{ width: '100%', aspectRatio: 3 / 2 }}
@@ -72,7 +89,23 @@ const Evolucion = () => {
 					onPress={() => navigation.navigate('Evolucion')}
 				/>
 			</TouchableOpacity> */}
-
+			<ScrollView
+				flex={1}
+				space={1}
+				mt='-20px'
+				borderTopLeftRadius='20px'
+				borderTopRightRadius='20px'
+				pt='20px'
+			>
+				{goals.map((item, id) => (
+					<Reto
+						key={id}
+						nombre={item.nombre}
+						detalle={item.detalle}
+						completado={item.completado}
+					/>
+				))}
+			</ScrollView>
 			<TouchableOpacity style={buttonStyle}>
 				<Button
 					title='Nuevo Reto'
@@ -93,7 +126,7 @@ const Evolucion = () => {
 					onPress={() => navigation.navigate('Activos')}
 				/>
 			</TouchableOpacity> */}
-		</ScrollView>
+		</View>
 	);
 };
 export default Evolucion;

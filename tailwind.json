@@ -4,19 +4,53 @@
 			"position": "absolute"
 		}
 	},
+	"bottom-0": {
+		"style": {
+			"bottom": 0
+		}
+	},
+	"right-5": {
+		"style": {
+			"right": 20
+		}
+	},
 	"flex": {
 		"style": {
 			"display": "flex"
 		}
 	},
-	"h-full": {
-		"style": {
-			"height": "100%"
-		}
-	},
 	"w-full": {
 		"style": {
 			"width": "100%"
+		}
+	},
+	"flex-1": {
+		"style": {
+			"flexGrow": 1,
+			"flexShrink": 1,
+			"flexBasis": "0%"
+		}
+	},
+	"bg-mainBlue": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(149 215 231 / var(--tw-bg-opacity))"
+		}
+	},
+	"text-xl": {
+		"style": {
+			"fontSize": 20,
+			"lineHeight": 28
+		}
+	},
+	"font-bold": {
+		"style": {
+			"fontWeight": "700"
+		}
+	},
+	"uppercase": {
+		"style": {
+			"textTransform": "uppercase"
 		}
 	}
 }
