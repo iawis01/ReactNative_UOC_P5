@@ -1,10 +1,9 @@
 import {
 	View,
-	Text,
 	Button,
 	ScrollView,
 	ActivityIndicator,
-	Pressable,
+	FlatList,
 	TouchableOpacity,
 } from 'react-native';
 import { useState, useEffect } from 'react';
@@ -35,12 +34,19 @@ const buttonStyle = {
 const Evolucion = () => {
 	const tw = useTailwind();
 	const navigation = useNavigation();
+	const [selectedId, setSelectedId] = useState(null);
 
 	const [goals, setGoals] = useState([]);
+
+	// Base de datos
 	useEffect(() => {
-		onSnapshot(collection(db, 'retos'), snapshot => {
-			setGoals(snapshot.docs.map(doc => doc.data()));
-		});
+		try {
+			onSnapshot(collection(db, 'retos'), snapshot => {
+				setGoals(snapshot.docs.map(doc => doc.data()));
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	}, [goals]);
 
 	// Estilo del Header
@@ -74,6 +80,20 @@ const Evolucion = () => {
 		});
 	}, [navigation]);
 
+	// Renderizar los retos en el FlatList
+	const renderItem = ({ item }) => {
+		// const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
+		// const color = item.id === selectedId ? 'white' : 'black';
+		return (
+			<Reto
+				key={item.id}
+				nombre={item.nombre}
+				detalle={item.detalle}
+				completado={item.completado}
+			/>
+		);
+	};
+
 	return (
 		// <View style={{ backgroundColor: '#95d7e7' }} flex={1}>
 		<View style={tw('bg-mainBlue flex-1')}>
@@ -89,7 +109,7 @@ const Evolucion = () => {
 					onPress={() => navigation.navigate('Evolucion')}
 				/>
 			</TouchableOpacity> */}
-			<ScrollView
+			{/* <ScrollView
 				flex={1}
 				space={1}
 				mt='-20px'
@@ -105,7 +125,14 @@ const Evolucion = () => {
 						completado={item.completado}
 					/>
 				))}
-			</ScrollView>
+			</ScrollView> */}
+
+			<FlatList
+				data={goals}
+				renderItem={renderItem}
+				keyExtractor={item => item.id}
+				extraData={selectedId}
+			/>
 			<TouchableOpacity style={buttonStyle}>
 				<Button
 					title='Nuevo Reto'
