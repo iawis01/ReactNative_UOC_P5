@@ -1,11 +1,14 @@
 import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { Image } from '@rneui/themed';
+import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useLayoutEffect, useState } from 'react';
 import { Button, ScrollView, TextInput } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { useTailwind } from 'tailwind-rn';
 
 const Contactar = () => {
+	const tw = useTailwind();
+
 	const initialText = '';
 	const [text, setText] = useState(initialText);
 	const navigation = useNavigation();
@@ -41,11 +44,25 @@ const Contactar = () => {
 				PlaceholderContent={<ActivityIndicator />}
 			/>
 
-			<ScrollView keyboardDismissMode='interactive'>
-				<Text>Conoce el Equipo</Text>
-				<Text>Iago</Text>
-				<Text>Gerard</Text>
-				<Text>Niko</Text>
+			<ScrollView>
+				<Text style={tw('text-2xl text-center font-bold mt-3')}>
+					Conoce al Equipo
+				</Text>
+				<Text style={tw('text-xl text-center font-bold p-2')}>Iago</Text>
+				<Text style={tw('text-center m-2')}>El Gallego intranquilo</Text>
+				<Image
+					source={require('../assets/gerard.jpg')}
+					style={[
+						tw('rounded-full w-20 h-20  left-2/4  mt-3 mb-1'),
+						{ transform: [{ translateX: -40 }] },
+					]}
+				/>
+				<Text style={tw('text-xl text-center font-bold p-2')}>Gerard</Text>
+				<Text style={tw('text-center m-2')}>
+					Nacido en Espana con sangre vikinga, viviendo a lo loco en Islandia
+					entre hielo y lava
+				</Text>
+				<Text style={tw('text-xl text-center font-bold p-2')}>Niko</Text>
 			</ScrollView>
 		</View>
 	);

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import {
 	View,
 	Text,
@@ -39,8 +40,8 @@ function Reto({
 			<Text style={tw('uppercase text-xl font-bold')}>{nombre}</Text>
 			<Text>{detalle}</Text>
 
-			<View style={tw('absolute bottom-0 right-8 bg-red-500 rounded-xl p-1 ')}>
-				<Text style={tw(' text-white')}>{completado}</Text>
+			<View style={tw('absolute bottom-0 right-8 bg-red-500 rounded-xl p-1')}>
+				<Text style={tw('text-white')}>{completado}%</Text>
 			</View>
 
 			<AntDesign
