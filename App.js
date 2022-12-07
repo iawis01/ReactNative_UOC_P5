@@ -14,7 +14,7 @@ export default function App() {
 		<TailwindProvider utilities={utilities}>
 			<NavigationContainer>
 				<RootNavigator />
-				{/* <StatusBar style='auto' /> */}
+				 <StatusBar style='auto' />
 			</NavigationContainer>
 		</TailwindProvider>
 	);
