@@ -3,19 +3,20 @@ import {
   Text,
   ActivityIndicator,
   TouchableOpacity,
-  TextInput,
   ScrollView,
-  Button,
+  Button
 } from "react-native";
+//import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Icon } from '@rneui/themed';
 import { useTailwind } from "tailwind-rn/dist";
 import { useNavigation } from "@react-navigation/native";
 import { useLayoutEffect, useState } from "react";
-import { Image } from "@rneui/themed";
+import { Image, Input } from "@rneui/themed";
 import { AntDesign } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../db/firebaseConfig";
-import { GenerateUUID } from "react-native-uuid";
 import uuid from "react-native-uuid";
 const NuevoReto = () => {
   const tw = useTailwind();
@@ -178,100 +179,103 @@ const NuevoReto = () => {
 
   return (
     <View style={styles.bigContainer}>
-      
+      <Text
+      style={styles.title}>Nuevo reto</Text>
     <ScrollView style={styles.container}>
       
-      <Text>Categoria</Text>
-      <TextInput
-        value={categoria}
-        onChangeText={(categoria) => {
-          setCategoria(categoria);
-        }}
-        placeholder="categoria"
-        style={styles.inputBox}
-      ></TextInput>
+    <Text style={styles.titleField}>Nombre <FontAwesomeIcon name="search"/></Text>
 
-      {reqCategoriaErr && (
-        <Text style={styles.errorText}>{messages.reqCategoria}</Text>
-      )}
-
-      <Text>Nombre</Text>
-      <TextInput
+      <Input
         value={nombre}
         onChangeText={(nombre) => {
           setNombre(nombre);
         }}
-        placeholder="nombre"
-        patterns
+        placeholder="Escribe el nombre del reto"
+        placeholderTextColor="white" 
+        errorMessage={reqNombreErr && messages.reqNombre}
+        errorStyle={styles.errorText1}
         style={styles.inputBox}
-      ></TextInput>
+      ></Input>
 
-      {reqNombreErr && (
-        <Text style={styles.errorText}>{messages.reqNombre}</Text>
-      )}
-<Text>Detalle</Text>
-      <TextInput
+<Text style={styles.titleField}>Detalle</Text>
+      <Input
         value={detalle}
         onChangeText={(detalle) => {
           setDetalle(detalle);
         }}
-        placeholder="detalle"
+        errorMessage={reqDetalleErr && messages.reqDetalle}
+        errorStyle={styles.errorText1}
+        placeholder="Describe tu reto"
+        placeholderTextColor="white" 
         style={styles.inputBox}
-      ></TextInput>
+      ></Input>
 
-      {reqDetalleErr && (
-        <Text style={styles.errorText}>{messages.reqDetalle}</Text>
-      )}
-      <Text>Periodicidad</Text>
-      <TextInput
-        value={periodicidad}
-        keyboardType="numeric"
-        onChangeText={(periodicidad) => {
-          setPeriodicidad(periodicidad);
+      <Text style={styles.titleField}>Categoria</Text>
+      <Input
+        value={categoria}
+        onChangeText={(categoria) => {
+          setCategoria(categoria);
         }}
-        placeholder="periodicidad"
+        errorMessage={reqCategoriaErr && messages.reqCategoria}
+        errorStyle={styles.errorText1}
+        placeholder="Escribe la categoria"
+        placeholderTextColor="white" 
         style={styles.inputBox}
-      ></TextInput>
+      ></Input>
 
-      {reqPeriodicidadErr && (
-        <Text style={styles.errorText}>{messages.reqPeriodicidad}</Text>
-      )}
-      {intPeriodicidadErr && (
-        <Text style={styles.errorText}>{messages.intPeriodicidad}</Text>
-      )}
-<Text>Prioridad</Text>
-      <TextInput
-        value={prioridad}
-        onChangeText={(prioridad) => {
-          setPrioridad(prioridad);
-        }}
-        placeholder="prioridad"
-        style={styles.inputBox}
-      ></TextInput>
+<Text style={styles.titleField}>Tiempo </Text>
 
-      {reqPrioridadErr && (
-        <Text style={styles.errorText}>{messages.reqPrioridad}</Text>
-      )}
-<Text>Tiempo</Text>
-      <TextInput
+      <Input
         value={tiempo}
         keyboardType="numeric"
         onChangeText={(tiempo) => {
           setTiempo(tiempo);
         }}
-        placeholder="tiempo"
+        placeholder="Días de duración"
+        placeholderTextColor="white" 
+        errorMessage={reqTiempoErr && messages.reqTiempo}
+        errorStyle={styles.errorText1}
         style={styles.inputBox}
-      ></TextInput>
-
-      {reqTiempoErr && (
-        <Text style={styles.errorText}>{messages.reqTiempo}</Text>
-      )}
+      ></Input>
       {intTiempoErr && (
-        <Text style={styles.errorText}>{messages.intTiempo}</Text>
+        <Text style={styles.errorText2}>{messages.intTiempo}</Text>
       )}
+     
+      <Text style={styles.titleField}>Periodicidad</Text>
+      <Input
+        value={periodicidad}
+        keyboardType="numeric"
+        onChangeText={(periodicidad) => {
+          setPeriodicidad(periodicidad);
+        }}
+        placeholder="Escribe la periodicidad semanal"
+        placeholderTextColor="white" 
+        errorMessage={(reqPeriodicidadErr && messages.reqPeriodicidad)}
+        errorStyle={styles.errorText1}
+        style={styles.inputBox}
+      ></Input>
+      {intPeriodicidadErr && (
+        <Text style={styles.errorText2}>{messages.intPeriodicidad}</Text>
+      )}
+<Text style={styles.titleField}>Prioridad</Text>
+
+      <Input
+        value={prioridad}
+        onChangeText={(prioridad) => {
+          setPrioridad(prioridad);
+        }}
+        placeholder="Atla, media o baja"
+        placeholderTextColor="white" 
+        style={styles.inputBox}
+        errorMessage={reqPrioridadErr && messages.reqPrioridad}
+        errorStyle={styles.errorText1}
+      ></Input>
+
 
       <TouchableOpacity style={styles.buttonStyle}>
-        <Button title="Crear reto" onPress={() => addGoal()} />
+        <FontAwesomeIcon.Button name ="save"  onPress={() => addGoal()} >
+        Crear reto
+          </FontAwesomeIcon.Button>
       </TouchableOpacity>
     </ScrollView>
     </View>
@@ -282,31 +286,59 @@ const styles = StyleSheet.create({
   bigContainer: {
     backgroundColor: "#998830",
     flex:1,
+    
   },
   container: {
     backgroundColor: "#998830",
     height: "100%",
     flex: 1,
+    
+  },
+  title:{
+    fontSize: 36,
+    color: "#437103",
+    fontWeight: "bold",
+    height: 50,
+    marginLeft: 10,
+  },
+  titleField:{
+    fontSize: 18,
+    color: "#B3B1B1",
+    marginLeft: 15,
+    marginBottom: -10,
   },
   inputBox: {
-    width: "60%",
+    borderBottomWidth: 1,
+    borderBottomColor: "white",
+    fontSize: 14,  
     padding: 10,
-    bordercolor: "gray",
-    borderWidth: 2,
-    borderRadius: 15,
+    color: "white"
   },
+
 
   buttonStyle: {
     color: "white",
-    fontSize: 42,
-    lineHeight: 84,
-    margin: 5,
+    fontSize: 30,
+    lineHeight: 70,
+    margin: 15,
+    marginHorizontal: 40,
+    borderRadius: 15,
     fontWeight: "bold",
     textAlign: "center",
     backgroundColor: "#000000c0",
+    
+
   },
-  errorText: {
+  errorText1: {
     color: "#ff0000",
+    fontSize: 13,
+    paddingBottom: -5
+  },
+  errorText2: {
+    color: "#ff0000",
+    marginLeft: 15,
+    fontSize: 13,
+    paddingBottom: -5,
   },
 });
 
