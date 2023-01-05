@@ -14,8 +14,9 @@ import { Image } from '@rneui/themed';
 import { AntDesign } from '@expo/vector-icons';
 import { db } from '../db/firebaseConfig';
 import { collection, onSnapshot } from 'firebase/firestore';
-import { ProgressBar } from 'react-native-paper';
 import Reto from '../components/Reto';
+import { ProgressBar } from 'react-native-paper';
+import * as Notifications from 'expo-notifications';
 
 const buttonStyle = {
 	bottom: 0,
@@ -32,26 +33,76 @@ const buttonStyle = {
 	borderRadius: 50,
 };
 
+// Handling notifications
+Notifications.setNotificationHandler({
+	handleNotification: async () => {
+		return {
+			shouldPlaySound: true,
+			shouldSetBadge: true,
+			shouldShowAlert: true,
+		};
+	},
+});
+
 const Evolucion = () => {
 	const tw = useTailwind();
 	const navigation = useNavigation();
 	const [selectedId, setSelectedId] = useState(null);
-	const [loading, setLoading] = useState(true);
 	const [goals, setGoals] = useState([]);
+	const [token, setToken] = useState('');
+	const [loading, setLoading] = useState(true);
 	const [status, setStatus] = useState(0.0);
 
-	// Base de datos
+	// Conseguir el token
+	// Pedir permisos para las push notifications
 	useEffect(() => {
-		try {
-			onSnapshot(collection(db, 'retos'), snapshot => {
-				setGoals(snapshot.docs.map(doc => doc.data()));
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	}, [goals]);
+		async function configurePushNotifications() {
+			const { status } = await Notifications.getPermissionsAsync();
+			let finalStatus = status;
 
-	// Barra de cargado
+			if (finalStatus !== 'granted') {
+				const { status } = await Notifications.requestPermissionsAsync();
+				finalStatus = status;
+			}
+			if (finalStatus !== 'granted') {
+				Alert.alert('Permission required', 'You must otorgate permissions');
+				return;
+			}
+			const pushTokenData = await Notifications.getExpoPushTokenAsync();
+			console.log(pushTokenData);
+			setToken(pushTokenData);
+
+			if (Platform.OS === 'android') {
+				Notifications.setNotificationChannelAsync('default', {
+					name: 'default',
+					importance: Notifications.AndroidImportance.DEFAULT,
+				});
+			}
+		}
+
+		configurePushNotifications();
+	}, []);
+
+	// Push Notificaciones Handler
+	function scheduleNotificationHandler() {
+		goals.map(goal => {
+			return setTimeout(() => {
+				fetch('https://exp.host/--/api/v2/push/send', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						to: token.data,
+						title: goal.nombre,
+						body: goal.detalle,
+					}),
+				});
+				// ejecutar la notificacion dependiendo de la periodicidad
+			}, goal.periodicidad * 1000);
+		});
+	}
+
 	useEffect(() => {
 		let value = 0.0;
 		setLoading(true);
@@ -63,6 +114,22 @@ const Evolucion = () => {
 				setLoading(false);
 			}
 		}, 30);
+	}, []);
+
+	// Base de datos
+	useEffect(() => {
+		try {
+			onSnapshot(collection(db, 'retos'), async snapshot => {
+				setGoals(snapshot.docs.map(doc => doc.data()));
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	}, []);
+
+	useEffect(() => {
+		// Activar notificaciones
+		scheduleNotificationHandler();
 	}, []);
 
 	// Estilo del Header
@@ -98,8 +165,6 @@ const Evolucion = () => {
 
 	// Renderizar los retos en el FlatList
 	const renderItem = ({ item }) => {
-		// const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
-		// const color = item.id === selectedId ? 'white' : 'black';
 		return (
 			<Reto
 				key={item.id}
@@ -115,14 +180,12 @@ const Evolucion = () => {
 	};
 
 	return (
-		// <View style={{ backgroundColor: '#95d7e7' }} flex={1}>
 		<View style={tw('bg-mainBlue flex-1')}>
 			<Image
 				source={require('../assets/evolucion.jpg')}
 				containerStyle={{ width: '100%', aspectRatio: 3 / 2 }}
 				PlaceholderContent={<ActivityIndicator />}
 			/>
-
 			{loading ? (
 				<ProgressBar
 					style={{ marginTop: 100 }}
