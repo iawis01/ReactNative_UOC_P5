@@ -14,6 +14,7 @@ import { Image } from '@rneui/themed';
 import { AntDesign } from '@expo/vector-icons';
 import { db } from '../db/firebaseConfig';
 import { collection, onSnapshot } from 'firebase/firestore';
+import { ProgressBar } from 'react-native-paper';
 import Reto from '../components/Reto';
 
 const buttonStyle = {
@@ -35,8 +36,9 @@ const Evolucion = () => {
 	const tw = useTailwind();
 	const navigation = useNavigation();
 	const [selectedId, setSelectedId] = useState(null);
-
+	const [loading, setLoading] = useState(true);
 	const [goals, setGoals] = useState([]);
+	const [status, setStatus] = useState(0.0);
 
 	// Base de datos
 	useEffect(() => {
@@ -48,6 +50,20 @@ const Evolucion = () => {
 			console.log(error);
 		}
 	}, [goals]);
+
+	// Barra de cargado
+	useEffect(() => {
+		let value = 0.0;
+		setLoading(true);
+		const interval = setInterval(() => {
+			value += 0.01;
+			setStatus(value);
+			if (value >= 1) {
+				clearInterval(interval);
+				setLoading(false);
+			}
+		}, 30);
+	}, []);
 
 	// Estilo del Header
 	useLayoutEffect(() => {
@@ -107,56 +123,28 @@ const Evolucion = () => {
 				PlaceholderContent={<ActivityIndicator />}
 			/>
 
-			{/* <TouchableOpacity style={buttonStyle}>
-				<Button
-					title='Evolucion'
-					onPress={() => navigation.navigate('Evolucion')}
+			{loading ? (
+				<ProgressBar
+					style={{ marginTop: 100 }}
+					progress={status}
+					color='#49B5F2'
 				/>
-			</TouchableOpacity> */}
-			{/* <ScrollView
-				flex={1}
-				space={1}
-				mt='-20px'
-				borderTopLeftRadius='20px'
-				borderTopRightRadius='20px'
-				pt='20px'
-			>
-				{goals.map((item, id) => (
-					<Reto
-						key={id}
-						nombre={item.nombre}
-						detalle={item.detalle}
-						completado={item.completado}
+			) : (
+				<>
+					<FlatList
+						data={goals}
+						renderItem={renderItem}
+						keyExtractor={item => item.id}
+						extraData={selectedId}
 					/>
-				))}
-			</ScrollView> */}
-
-			<FlatList
-				data={goals}
-				renderItem={renderItem}
-				keyExtractor={item => item.id}
-				extraData={selectedId}
-			/>
-			<TouchableOpacity style={buttonStyle}>
-				<Button
-					title='Nuevo Reto'
-					onPress={() => navigation.navigate('NuevoReto')}
-				/>
-			</TouchableOpacity>
-			{/* 
-			<TouchableOpacity style={buttonStyle}>
-				<Button
-					title='Retos Completados'
-					onPress={() => navigation.navigate('Completados')}
-				/>
-			</TouchableOpacity>
-
-			<TouchableOpacity style={buttonStyle}>
-				<Button
-					title='Retos Activos'
-					onPress={() => navigation.navigate('Activos')}
-				/>
-			</TouchableOpacity> */}
+					<TouchableOpacity style={buttonStyle}>
+						<Button
+							title='Nuevo Reto'
+							onPress={() => navigation.navigate('NuevoReto')}
+						/>
+					</TouchableOpacity>
+				</>
+			)}
 		</View>
 	);
 };
