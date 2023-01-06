@@ -2,15 +2,16 @@ import { useState, useEffect } from 'react';
 import {
 	View,
 	Text,
+	Image,
 	TouchableOpacity,
 	TouchableWithoutFeedback,
 } from 'react-native';
 import { useTailwind } from 'tailwind-rn';
-import { Image } from '@rneui/themed';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 function Reto({
+	id,
 	nombre,
 	detalle,
 	completado,
@@ -18,6 +19,7 @@ function Reto({
 	tiempo,
 	activo,
 	prioridad,
+	iconoURI
 }) {
 	const tw = useTailwind();
 	const navigation = useNavigation();
@@ -28,6 +30,7 @@ function Reto({
 				activeOpacity={0.9}
 				onPress={() =>
 					navigation.navigate('DetalleReto', {
+						id: id,
 						nombre: nombre,
 						detalle: detalle,
 						completado: completado,
@@ -35,12 +38,13 @@ function Reto({
 						tiempo: tiempo,
 						activo: activo,
 						prioridad: prioridad,
+						iconoURI: iconoURI
 					})
 				}
 			>
 				<Text style={tw('uppercase text-xl font-bold')}>{nombre}</Text>
 				<Text>{detalle}</Text>
-
+				<Image source={{ uri: iconoURI }} style={{width: 20, height: 20}}></Image>
 				<View style={tw('absolute bottom-0 right-8 bg-red-500 rounded-xl p-1')}>
 					<Text style={tw('text-white')}>{completado}%</Text>
 				</View>

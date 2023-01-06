@@ -40,12 +40,28 @@
 			"adaptiveIcon": {
 				"foregroundImage": "./assets/adaptative-iconandroid.png",
 				"backgroundColor": "#FFFFFF"
-			}
+			},
+      "permissions": [
+				"CAMERA",
+				"Permissions.CAMERA",
+				"READ_INTERNAL_STORAGE",
+				"WRITE_INTERNAL_STORAGE",
+				"READ_EXTERNAL_STORAGE",
+				"WRITE_EXTERNAL_STORAGE"
+			]
 		},
 		"web": {
 			"favicon": "./assets/favicon.png"
 		},
 		"owner": "iposse",
+		"plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to update a goal."
+        }
+      ]
+    ],
 		"extra": {
 			"eas": {
 				"projectId": "8beb8c60-3a57-4524-9245-eeef2d1bd261"

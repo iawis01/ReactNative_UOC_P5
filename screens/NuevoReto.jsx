@@ -15,7 +15,7 @@ import { useLayoutEffect, useState } from "react";
 import { Image, Input } from "@rneui/themed";
 import { AntDesign } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../db/firebaseConfig";
 import uuid from "react-native-uuid";
 const NuevoReto = () => {
@@ -42,6 +42,8 @@ const NuevoReto = () => {
 
   const [intPeriodicidadErr, setIntPeriodicidadErr] = useState(false);
   const [intTiempoErr, setIntTiempoErr] = useState(false);
+
+  const newDocRef = doc(collection(db, "retos"));
 
   const messages = {
     req: "Debe rellenar todos los campos",
@@ -125,9 +127,9 @@ const NuevoReto = () => {
     ) {
       alert(messages.req);
     }else {
-      addDoc(collection(db, "retos"), {
-        id: uuid.v4(),
-        activo: true,
+        setDoc(
+       newDocRef, 
+       {activo: true,
         categoria: categoria,
         completado: 0,
         detalle: detalle,
@@ -135,8 +137,8 @@ const NuevoReto = () => {
         periodicidad: Number(periodicidad),
         prioridad: prioridad,
         tiempo: Number(tiempo),
-      })
-        .then(() => {
+         id: newDocRef.id
+       }).then(() => {
           console.log("goal submitted");
         })
         .catch((error) => {
@@ -264,7 +266,7 @@ const NuevoReto = () => {
         onChangeText={(prioridad) => {
           setPrioridad(prioridad);
         }}
-        placeholder="Atla, media o baja"
+        placeholder="Alta, media o baja"
         placeholderTextColor="white" 
         style={styles.inputBox}
         errorMessage={reqPrioridadErr && messages.reqPrioridad}

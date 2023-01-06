@@ -17,6 +17,7 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import Reto from '../components/Reto';
 import { ProgressBar } from 'react-native-paper';
 import * as Notifications from 'expo-notifications';
+import { Alert } from 'react-native';
 
 const buttonStyle = {
 	bottom: 0,
@@ -168,6 +169,7 @@ const Evolucion = () => {
 		return (
 			<Reto
 				key={item.id}
+				id={item.id}
 				nombre={item.nombre}
 				detalle={item.detalle}
 				completado={item.completado}
@@ -175,6 +177,7 @@ const Evolucion = () => {
 				tiempo={item.tiempo}
 				activo={item.activo}
 				prioridad={item.prioridad}
+				iconoURI={item.iconoURI}
 			/>
 		);
 	};
