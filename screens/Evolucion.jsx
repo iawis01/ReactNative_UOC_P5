@@ -17,7 +17,6 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import Reto from '../components/Reto';
 import { ProgressBar } from 'react-native-paper';
 import * as Notifications from 'expo-notifications';
-import { Alert } from 'react-native';
 
 const buttonStyle = {
 	bottom: 0,
@@ -74,7 +73,7 @@ const Evolucion = () => {
 			setToken(pushTokenData);
 
 			if (Platform.OS === 'android') {
-				Notifications.setNotificationChannelAsync('default', {
+				await Notifications.setNotificationChannelAsync('default', {
 					name: 'default',
 					importance: Notifications.AndroidImportance.DEFAULT,
 				});
