@@ -56,23 +56,35 @@ function PhotoMenu({passId}){
   };
 
   async function verifyPermissions(){
-    const permissionResponse = await requestPermission();
-
-    if(cameraPermissionInformation.status === PermissionStatus.DENIED){
-      Alert.alert("Camera permissions needed for use this app.");
-      return false;
+    if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED){
+       const permissionResponse = await requestPermission();
+       return permissionResponse.granted;
     }
-    return true;
-  }
+     if(cameraPermissionInformation.status === PermissionStatus.DENIED){
+       Alert.alert("Camera permissions needed for use this app.");
+       return false;
+     }
+     return true;
+   }
 
   async function takeImageHandler(){
-   //if(Platform.OS === "ios"){
-    const hasPermission = await requestCameraPermission();
+    if(Platform.OS === "android"){
+      const hasPermission = await requestCameraPermission();
+  
+      if(!hasPermission) {
+        return;
+        }
+      }
+
+
+   if(Platform.OS === "ios"){
+    const hasPermission = await verifyPermissions();
 
     if(!hasPermission) {
       return;
     }
-   //}
+    }
+  
     const image = await launchCameraAsync({
       allowsEditing: true,
       aspect: [16,9],
